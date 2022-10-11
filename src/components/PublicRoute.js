@@ -16,7 +16,7 @@ const PublicRoute = ({ children, ...routeProps }) => {
   }
 
   if(profile && !isLoading){
-    return <Redirect to="/signin"/>//if 
+    return <Redirect to="/"/>//if 
   }
 
   return (

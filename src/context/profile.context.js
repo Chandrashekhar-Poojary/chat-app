@@ -34,7 +34,7 @@ export const ProfileProvider = ({ children }) =>{
 
       }else{
         if(userRef){
-          userRef.Off(); // signed off
+          userRef.off(); // signed off
         }
         setProfile(null);
         setIsLoading(false);
@@ -44,7 +44,7 @@ export const ProfileProvider = ({ children }) =>{
     return () =>{
       authUnsub();
       if(userRef){
-        userRef.Off();
+        userRef.off();
       }
     }
   },[]);
