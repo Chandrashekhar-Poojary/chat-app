@@ -7,6 +7,6 @@
       }
     },
     ".read": false,
-    ".write": false
+    ".write": true
   }
 }
