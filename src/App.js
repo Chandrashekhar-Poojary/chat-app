@@ -6,18 +6,22 @@ import PublicRoute from "./components/PublicRoute";
 import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import './styles/main.scss';
+import { ProfileProvider } from "./context/profile.context";
 
 function App() {
+  // ProfileProvider is a context Api that manage the profile
   return (
-    <Switch>
-      <PublicRoute path="/signin">
-        <Signin />
-      </PublicRoute>
+    <ProfileProvider> 
+      <Switch>
+        <PublicRoute path="/signin">
+          <Signin />
+        </PublicRoute>
 
-      <PrivateRoute path="/">
-        <Home />
-      </PrivateRoute>
-    </Switch>
+        <PrivateRoute path="/">
+          <Home />
+        </PrivateRoute>
+      </Switch>
+    </ProfileProvider>
   );
 }
 
