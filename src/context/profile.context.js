@@ -20,11 +20,12 @@ export const ProfileProvider = ({ children }) =>{
       if(authObj){
         userRef = database.ref(`/profiles/${authObj.uid}`)
         userRef.on('value', (snap)=>{    // realtime listener whenever data is modified it will changes everywhere
-          const {name, createdAt} =  snap.val();
+          const {name, createdAt, avatar} =  snap.val();
           //console.log(profileData);
           const data = {
             name,
             createdAt,
+            avatar,
             uid: authObj.uid,
             email: authObj.email
           };
