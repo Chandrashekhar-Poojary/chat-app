@@ -1,5 +1,5 @@
-import React from 'react'
-import TimeAgo from 'timeago-react'
+import React from 'react';
+import TimeAgo from 'timeago-react';
 
 const RoomItem = ({room}) => {
 
