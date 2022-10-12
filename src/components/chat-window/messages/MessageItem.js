@@ -10,8 +10,7 @@ const MessageItem = ({message}) => {
     <li className='padded mb-1'>
       <div className='d-flex align-items-center font-bolder mb-1'>
           <ProfileAvatar src={author.avatar} name={author.name} className="ml-1" size="xs"/>
-        
-    
+      
         <ProfileInfoBtnModal profile={author} appearance="link" className="p-0 ml-1 text-black" />
         <TimeAgo 
               datetime={ 
