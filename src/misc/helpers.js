@@ -1,5 +1,4 @@
-import database from './firebase';
-
+//import database from './firebase'
 export function getNameInitials(name){
     const splitName = name.toUpperCase().split(' ');
 
