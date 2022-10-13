@@ -9,7 +9,7 @@ const MAX_FILE_SIZE = 1000 * 1024 * 5;
 const AttachmentBtnModal = ({ afterUpload}) => {
 
     const {isOpen, open, close} = useModalState();
-    const {chatID} = useParams()
+    const {chatId} = useParams()
 
     const [fileList, setFileList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +22,7 @@ const AttachmentBtnModal = ({ afterUpload}) => {
         try {
             const uploadPromises = fileList.map(f =>{
                 return storage
-                    .ref(`/chat/${chatID}`)
+                    .ref(`/chat/${chatId}`)
                     .child(Date.now() + f.name)
                     .put(f.blobFile, {
                         cacheControl: `public, max-age=${3600 * 24 * 3}`,
