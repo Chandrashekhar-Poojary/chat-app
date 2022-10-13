@@ -51,6 +51,7 @@ const Messages = () => {
 
     },[chatId]);
 
+
     const handleLike = useCallback(async(msgId)=>{
 
       const {uid} = auth.currentUser;
@@ -78,7 +79,40 @@ const Messages = () => {
         })
 
         Alert.info(alertMsg, 4000);
-    },[])
+    },[]);
+
+    const handleDelete = useCallback(
+      async(msgId) => {
+        if(!window.confirm('Delete thos message')){
+          return;
+        }
+        const updates = {};
+
+        const isLast = messages[messages.length - 1].id === msgId;
+
+        updates[`/messages/${msgId}`] = null;
+        if(isLast && messages.length > 1){
+          updates[`/rooms/${chatId}/lastMessage`] = {
+            ...messages[messages.length - 2],
+            msgId: messages[messages.length - 2].id
+          };
+        }
+
+        if(isLast && messages.length === 1 ){
+          updates[`/rooms/${chatId}/lastMessage`] = null;
+        }
+
+        try {
+          await database.ref().update(updates);
+          Alert.info('Mesaage has been deleted')
+        } catch (err) {
+          Alert.error(err.message);
+        }
+
+      },
+      [chatId, messages],
+    );
+
   return (
     <ul className='msg-list custom-scroll'>
         {
@@ -86,7 +120,14 @@ const Messages = () => {
         }
         {
             canShowMessages && 
-            messages.map(msg => <MessageItem key={msg.id} message={msg} handleAdmin={handleAdmin} handleLike={handleLike}/>)
+            messages.map(msg => (
+              <MessageItem 
+                key={msg.id} 
+                message={msg} 
+                handleAdmin={handleAdmin} 
+                handleLike={handleLike}
+                handleDelete={handleDelete}
+              />))
         }
     </ul>
   )
